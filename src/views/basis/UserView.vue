@@ -43,7 +43,7 @@
 			<el-table-column prop="address" label="所属职级"> </el-table-column>
 			<el-table-column prop="address" label="所属部门"> </el-table-column>
 			<el-table-column label="操作">
-				<template slot-scope="scope">
+				<template v-slot="scope">
 					<el-button size="mini">修改</el-button>
 					<el-button size="mini" type="danger">删除</el-button>
 				</template>
@@ -51,7 +51,7 @@
 		</el-table>
 
 		<my-page
-			:data="tableData"
+			:data="tableData.length"
 			:currentPage="currentPage"
 			:pageSize="pageSize"
 			@handleSizeChange="handleSizeChange"

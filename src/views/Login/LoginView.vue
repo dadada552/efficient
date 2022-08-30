@@ -96,7 +96,7 @@ export default {
 		}
 	},
 	created() {
-		axios.get("/user/imgcode/").then((res) => {
+		axios.get("/effect/user/imgcode/").then((res) => {
 			this.imgUrl = res.data.img
 		})
 	},
@@ -108,7 +108,7 @@ export default {
 				if (valid) {
 					//登录的接口
 					axios
-						.post("/user/login/", {
+						.post("/effect/user/login/", {
 							params: {
 								name: this.ruleForm.name,
 								password: this.ruleForm.password,
@@ -130,7 +130,7 @@ export default {
 		},
 		//改变图片验证码
 		changeCode() {
-			axios.get("/user/imgcode/").then((res) => {
+			axios.get("/effect/user/imgcode/").then((res) => {
 				this.imgUrl = res.data.img
 			})
 		}

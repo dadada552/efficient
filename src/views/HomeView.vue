@@ -30,7 +30,7 @@
 							<span slot="title">{{ item.name }}</span>
 						</el-menu-item>
 						<el-submenu v-else :index="item.path" :key="item.id">
-							<template slot="title">
+							<template v-slot:title>
 								<i :class="item.icon" style="color: #fff"></i>
 								<span slot="title">{{ item.name }}</span>
 							</template>
@@ -100,7 +100,7 @@ export default {
 		}
 	},
 	created() {
-		axios.get("/home/menus/").then((res) => {
+		axios.get("/effect/home/menus/").then((res) => {
 			console.log(res.data.data)
 			this.menuList = res.data.data
 		})

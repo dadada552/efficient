@@ -11,4 +11,7 @@
 	box-sizing: border-box;
 	list-style: none;
 }
+::v-deep .cell {
+	text-align: center !important;
+}
 </style>

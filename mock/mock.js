@@ -9,8 +9,7 @@ app.use("/user/imgcode/", function (req, res) {
 	res.json(
 		Mock.mock({
 			code: "200",
-			msg: "获取成功",
-			img: Mock.Random.dataImage("50x20", Mock.mock({ regexp: /\w{4}/ }).regexp)
+			msg: "获取成功"
 		})
 	)
 })
