@@ -10,8 +10,11 @@
 				>查询</el-button
 			>
 			<el-button icon="el-icon-refresh-right">重置</el-button>
-			<el-button type="primary" icon="el-icon-circle-plus-outline"
-				>新增用户</el-button
+			<el-button
+				type="primary"
+				icon="el-icon-circle-plus-outline"
+				@click="addMenu"
+				>新增菜单</el-button
 			>
 		</div>
 		<!-- 表格页面 -->
@@ -54,15 +57,18 @@
 				@handleCurrentChange="handleCurrentChange"
 			></myPagination>
 		</div>
+		<menu-dialog ref="menuDialog" v-if="menuFlag"></menu-dialog>
 	</div>
 </template>
 
 // 行为
 <script>
 import myPagination from "@/components/myPagination.vue"
+import menuDialog from "./menucom.vue"
 export default {
 	components: {
-		myPagination
+		myPagination,
+		menuDialog
 	},
 	data() {
 		return {
@@ -89,7 +95,8 @@ export default {
 				}
 			],
 			currentPage: 1,
-			pageSize:5
+			pageSize: 5,
+			menuFlag: false
 		}
 	},
 	created() {},
@@ -101,6 +108,13 @@ export default {
 		},
 		handleCurrentChange(val) {
 			console.log(`当前页: ${val}`)
+		},
+		/**添加菜单栏 */
+		addMenu() {
+			this.menuFlag = true
+			this.$nextTick(() => {
+				this.$refs.menuDialog.dialogFormVisible = true
+			})
 		},
 		// 编辑
 		handleEdit(index, row) {

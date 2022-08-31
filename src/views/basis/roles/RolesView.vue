@@ -1,4 +1,3 @@
-
 <template>
 	<div class="roles-box">
 		<div class="header">
@@ -7,7 +6,10 @@
 				>查询</el-button
 			>
 			<el-button icon="el-icon-refresh-right" @click="remake">重置</el-button>
-			<el-button type="primary" icon="el-icon-circle-plus-outline" @click="add"
+			<el-button
+				type="primary"
+				icon="el-icon-circle-plus-outline"
+				@click="addRoles"
 				>新增用户</el-button
 			>
 		</div>
@@ -42,13 +44,17 @@
 				@handleCurrentChange="handleCurrentChange"
 			></myPagination>
 		</div>
+
+		<roles-dialog ref="roles" v-show="rolesFlag"></roles-dialog>
 	</div>
 </template>
 <script>
 import myPagination from "@/components/myPagination.vue"
+import rolesDialog from "./rolesDialog.vue"
 export default {
 	components: {
-		myPagination
+		myPagination,
+		rolesDialog
 	},
 	data() {
 		return {
@@ -61,7 +67,8 @@ export default {
 				}
 			],
 			currentPage: 1,
-			pageSize: 5
+			pageSize: 5,
+			rolesFlag: false
 		}
 	},
 	created() {},
@@ -84,8 +91,13 @@ export default {
 		},
 		// 查询
 		search() {},
-		// 新增
-		add() {},
+		/**新增角色 */
+		addRoles() {
+			this.rolesFlag = true
+			this.$nextTick(() => {
+				this.$refs.roles.dialogFormVisible = true
+			})
+		},
 		// 重置
 		remake() {}
 	}

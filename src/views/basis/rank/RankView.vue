@@ -11,7 +11,7 @@
 			>
 			<el-button icon="el-icon-refresh-right" @click="remake">重置</el-button>
 			<el-button type="primary" icon="el-icon-circle-plus-outline" @click="add"
-				>新增用户</el-button
+				>新增职级</el-button
 			>
 		</div>
 		<!-- 表格页面 -->
@@ -45,15 +45,17 @@
 				@handleCurrentChange="handleCurrentChange"
 			></myPagination>
 		</div>
+		<rank-dialog ref="rankDialog" v-if="rankFlag"></rank-dialog>
 	</div>
 </template>
 
-// 行为
 <script>
 import myPagination from "@/components/myPagination.vue"
+import rankDialog from "./rankment.vue"
 export default {
 	components: {
-		myPagination
+		myPagination,
+		rankDialog
 	},
 	data() {
 		return {
@@ -66,7 +68,8 @@ export default {
 				}
 			],
 			currentPage: 1,
-			pageSize: 5
+			pageSize: 5,
+			rankFlag: false
 		}
 	},
 	created() {},
@@ -90,7 +93,12 @@ export default {
 		// 查询
 		search() {},
 		// 新增
-		add() {},
+		add() {
+			this.rankFlag = true
+			this.$nextTick(() => {
+				this.$refs.rankDialog.dialogFormVisible = true
+			})
+		},
 		// 重置
 		remake() {}
 	}

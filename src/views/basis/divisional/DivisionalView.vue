@@ -10,8 +10,11 @@
 				>查询</el-button
 			>
 			<el-button icon="el-icon-refresh-right">重置</el-button>
-			<el-button type="primary" icon="el-icon-circle-plus-outline"
-				>新增用户</el-button
+			<el-button
+				type="primary"
+				icon="el-icon-circle-plus-outline"
+				@click="addDep"
+				>新增菜单</el-button
 			>
 		</div>
 		<!-- 表格页面 -->
@@ -52,15 +55,18 @@
 				@handleCurrentChange="handleCurrentChange"
 			></myPagination>
 		</div>
+		<dep-dialog ref="dep" v-if="depFlag"> </dep-dialog>
 	</div>
 </template>
 
 // 行为
 <script>
 import myPagination from "@/components/myPagination.vue"
+import depDialog from "./departcom.vue"
 export default {
 	components: {
-		myPagination
+		myPagination,
+		depDialog
 	},
 	data() {
 		return {
@@ -87,7 +93,8 @@ export default {
 				}
 			],
 			currentPage: 1,
-			pageSize: 5
+			pageSize: 5,
+			depFlag: false
 		}
 	},
 	created() {},
@@ -107,6 +114,12 @@ export default {
 		// 删除
 		handleDelete(index, row) {
 			console.log(index, row)
+		},
+		addDep() {
+			this.depFlag = true
+			this.$nextTick(() => {
+				this.$refs.dep.dialogFormVisible = true
+			})
 		}
 	}
 }

@@ -10,8 +10,11 @@
 				>查询</el-button
 			>
 			<el-button icon="el-icon-refresh-right">重置</el-button>
-			<el-button type="primary" icon="el-icon-circle-plus-outline"
-				>新增用户</el-button
+			<el-button
+				type="primary"
+				icon="el-icon-circle-plus-outline"
+				@click="addJob"
+				>新增职级</el-button
 			>
 		</div>
 		<!-- 表格页面 -->
@@ -45,15 +48,18 @@
 				@handleCurrentChange="handleCurrentChange"
 			></myPagination>
 		</div>
+		<job-dialog ref="jobDialog" v-if="jobFlag"></job-dialog>
 	</div>
 </template>
 
 // 行为
 <script>
 import myPagination from "@/components/myPagination.vue"
+import jobDialog from "./postcom.vue"
 export default {
 	components: {
-		myPagination
+		myPagination,
+		jobDialog
 	},
 	data() {
 		return {
@@ -67,7 +73,8 @@ export default {
 				}
 			],
 			currentPage: 1,
-			pageSize: 5
+			pageSize: 5,
+			jobFlag: false
 		}
 	},
 	created() {},
@@ -87,6 +94,13 @@ export default {
 		// 删除
 		handleDelete(index, row) {
 			console.log(index, row)
+		},
+		/**新增职级 */
+		addJob() {
+			this.jobFlag = true
+			this.$nextTick(() => {
+				this.$refs.jobDialog.dialogFormVisible = true
+			})
 		}
 	}
 }
