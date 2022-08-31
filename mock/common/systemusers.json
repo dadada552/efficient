@@ -1,0 +1,22 @@
+{
+	"code": 200,
+	"msg": "查询成功",
+	"data": [
+		{
+			"id": 1,
+			"name": "鸣人",
+			"account": "鸣人",
+			"mobile": "15111111111",
+			"state_time": "2022-08-28T17:13:00Z",
+			"address": "北京",
+			"birthday": "8",
+			"sex": "男",
+			"userstate": 3,
+			"is_delete": false,
+			"rank": "p1",
+			"position": 1,
+			"department": "财务部",
+			"role": "管理者"
+		}
+	]
+}

@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import myAside from "../components/myAside.vue"
+import myAside from "@/components/myAside.vue"
 export default {
 	components: { myAside },
 	data() {

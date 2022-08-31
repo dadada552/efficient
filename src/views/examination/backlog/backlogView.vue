@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import myPage from "../../components/myPagination.vue"
+import myPage from "@/components/myPagination.vue"
 import topForm from "@/components/topForm.vue"
 export default {
 	name: "",

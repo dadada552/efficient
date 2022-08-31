@@ -3,7 +3,7 @@ import App from "./App.vue"
 import router from "./router"
 import store from "./store"
 import ElementUI from "element-ui"
-import "../public/element-variables.scss"
+import "./style/element-variables.scss"
 import http from "./utils/http"
 
 Vue.prototype.$http = http

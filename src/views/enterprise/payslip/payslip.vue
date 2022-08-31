@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import myPage from "../../components/myPagination.vue"
+import myPage from "@/components/myPagination.vue"
 export default {
 	name: "",
 	components: { myPage },

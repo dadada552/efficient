@@ -47,7 +47,7 @@
 
 // 行为
 <script>
-import myPagination from "../../components/myPagination.vue"
+import myPagination from "@/components/myPagination.vue"
 export default {
 	components: {
 		myPagination

@@ -2,8 +2,8 @@
 <template>
 	<div class="roles-box">
 		<div class="header">
-			岗位名称:<el-input
-				placeholder="请输入岗位名称"
+			菜单管理:<el-input
+				placeholder="请输入菜单管理"
 				style="width: 20%"
 			></el-input>
 			<el-button icon="el-icon-search" style="margin-left: 25px"
@@ -16,10 +16,19 @@
 		</div>
 		<!-- 表格页面 -->
 		<div class="table-box">
-			<el-table :data="tableData" stripe style="width: 100%" border>
-				<el-table-column prop="id" label="id"> </el-table-column>
-				<el-table-column prop="name" label="岗位名称"> </el-table-column>
-				<el-table-column prop="id" label="备注"> </el-table-column>
+			<el-table
+				:data="tableData"
+				style="width: 100%; margin-bottom: 20px"
+				row-key="id"
+				border
+				default-expand-all
+				:tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+			>
+				<el-table-column prop="date" label="日期" sortable width="180">
+				</el-table-column>
+				<el-table-column prop="name" label="姓名" sortable width="180">
+				</el-table-column>
+				<el-table-column prop="address" label="地址"> </el-table-column>
 				<el-table-column label="操作">
 					<template slot-scope="scope">
 						<el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
@@ -50,7 +59,7 @@
 
 // 行为
 <script>
-import myPagination from "../../components/myPagination.vue"
+import myPagination from "@/components/myPagination.vue"
 export default {
 	components: {
 		myPagination
@@ -59,15 +68,28 @@ export default {
 		return {
 			tableData: [
 				{
-					id: 1,
-					name: "实习生",
-					rank_id: 4,
-					department_id: 1,
-					create_date: "2022-08-23T12:00:00"
+					id: 3,
+					date: "2016-05-01",
+					name: "王小虎",
+					address: "上海市普陀区金沙江路 1519 弄",
+					children: [
+						{
+							id: 31,
+							date: "2016-05-01",
+							name: "王小虎",
+							address: "上海市普陀区金沙江路 1519 弄"
+						},
+						{
+							id: 32,
+							date: "2016-05-01",
+							name: "王小虎",
+							address: "上海市普陀区金沙江路 1519 弄"
+						}
+					]
 				}
 			],
 			currentPage: 1,
-			pageSize: 5
+			pageSize:5
 		}
 	},
 	created() {},
@@ -106,5 +128,17 @@ export default {
 	display: flex;
 	align-items: center;
 	font-size: 18px;
+}
+.demo-table-expand {
+	font-size: 0;
+}
+.demo-table-expand label {
+	width: 90px;
+	color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+	margin-right: 0;
+	margin-bottom: 0;
+	width: 50%;
 }
 </style>

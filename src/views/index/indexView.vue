@@ -71,7 +71,7 @@
 <script>
 import pie from "./pieView.vue"
 import columnar from "./ColumnarView.vue"
-import { geteMpdats, geteBirthdays } from "../../utils/api"
+import { geteMpdats, geteBirthdays } from "@/utils/api"
 export default {
 	components: { pie, columnar },
 	data() {

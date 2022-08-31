@@ -17,37 +17,32 @@ export default {
 		geteBirthdays().then((res) => {
 			this.birthdaysKeys = Object.keys(res.data.data)
 			this.birthdaysValue = Object.values(res.data.data)
-			console.log()
+			let chartDom = document.getElementById("birthday")
+			let myChart = echarts.init(chartDom)
+			let option
+			option = {
+				xAxis: {
+					type: "category",
+					data: this.birthdaysKeys
+				},
+				yAxis: {
+					type: "value"
+				},
+				series: [
+					{
+						data: this.birthdaysValue,
+						type: "bar",
+						showBackground: true,
+						backgroundStyle: {
+							color: "rgba(180, 180, 180, 0.2)"
+						}
+					}
+				]
+			}
+			option && myChart.setOption(option)
 		})
 	},
-	mounted() {
-		console.log(this)
-		console.log(this.birthdaysKeys)
-		let _this = this
-		let chartDom = document.getElementById("birthday")
-		let myChart = echarts.init(chartDom)
-		let option
-		option = {
-			xAxis: {
-				type: "category",
-				data: _this.birthdaysKeys
-			},
-			yAxis: {
-				type: "value"
-			},
-			series: [
-				{
-					data: _this.birthdaysValue,
-					type: "bar",
-					showBackground: true,
-					backgroundStyle: {
-						color: "rgba(180, 180, 180, 0.2)"
-					}
-				}
-			]
-		}
-		option && myChart.setOption(option)
-	},
+	mounted() {},
 	methods: {}
 }
 </script>

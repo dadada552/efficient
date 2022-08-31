@@ -10,6 +10,7 @@
 			text-color="#fff"
 			active-text-color="#fff"
 			router
+			unique-opened
 		>
 			<template v-for="item in menuList">
 				<el-menu-item v-if="!item.isDir" :index="item.path" :key="item.id">

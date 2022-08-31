@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import myPage from "../../components/myPagination.vue"
-import mytop from "../../components/topForm.vue"
+import myPage from "@/components/myPagination.vue"
+import mytop from "@/components/topForm.vue"
 export default {
 	name: "",
 	components: { myPage, mytop },
