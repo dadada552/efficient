@@ -1,8 +1,8 @@
 import axios from "axios"
 import { MessageBox } from "element-ui"
 import { getToken } from "./auth"
-const app = axios.create({
-	baseURL: "http://localhost:8089",
+const http = axios.create({
+	baseURL: "/effect",
 	timeout: 3000,
 	headers: {
 		"Content-Type": "application/json:charset=utf-8"
@@ -10,7 +10,7 @@ const app = axios.create({
 	withCredentials: true
 })
 
-app.interceptors.request.use(
+http.interceptors.request.use(
 	(config) => {
 		config.headers.token = getToken()
 		return config
@@ -20,7 +20,7 @@ app.interceptors.request.use(
 	}
 )
 
-app.interceptors.response.use(
+http.interceptors.response.use(
 	(response) => {
 		return response
 	},
@@ -28,7 +28,9 @@ app.interceptors.response.use(
 		let title = ""
 		let msg = ""
 		if (error && error.response) {
-			msg = error.response.data.message
+			// console.log(error.message)
+			// msg = error.response.data.msg
+			msg = error.message
 			switch (error.response.status) {
 				case 400:
 					title = "错误请求"
@@ -69,7 +71,7 @@ app.interceptors.response.use(
 				default:
 					title = error.response.status
 			}
-			return MessageBox.alert(message, title, {
+			return MessageBox.alert(msg, title, {
 				type: "warning"
 			})
 		} else {
@@ -79,5 +81,4 @@ app.interceptors.response.use(
 		}
 	}
 )
-console.log(http, "112")
 export default http

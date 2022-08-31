@@ -1,0 +1,12 @@
+{
+	"code": 200,
+	"msg": "获取成功",
+	"data": {
+		"count": 10,
+		"formal": 10,
+		"exercitation": 0,
+		"awaitrding": 0,
+		"awaitdimission": 0,
+		"awaitpositive": 0
+	}
+}

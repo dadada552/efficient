@@ -28,27 +28,27 @@
 				<ul class="content">
 					<li>
 						<p>员工总人数</p>
-						<p>2000人</p>
+						<p>{{ empdats.count }}人</p>
 					</li>
 					<li>
-						<p>员工总人数</p>
-						<p>2000人</p>
+						<p>正式员工</p>
+						<p>{{ empdats.formal }}人</p>
 					</li>
 					<li>
-						<p>员工总人数</p>
-						<p>2000人</p>
+						<p>实习生</p>
+						<p>{{ empdats.exercitation }}人</p>
 					</li>
 					<li>
-						<p>员工总人数</p>
-						<p>2000人</p>
+						<p>本月待入职</p>
+						<p>{{ empdats.awaitrding }}人</p>
 					</li>
 					<li>
-						<p>员工总人数</p>
-						<p>2000人</p>
+						<p>本月待离职</p>
+						<p>{{ empdats.awaitdimission }}人</p>
 					</li>
 					<li>
-						<p>员工总人数</p>
-						<p>2000人</p>
+						<p>本月待转正</p>
+						<p>{{ empdats.awaitpositive }}人</p>
 					</li>
 				</ul>
 			</div>
@@ -60,7 +60,10 @@
 		<!-- 员工生日 -->
 		<div class="employees-birthday">
 			<div class="title">员工生日</div>
-			<div><columnar></columnar></div>
+			<div>
+				<columnar
+				></columnar>
+			</div>
 		</div>
 	</div>
 </template>
@@ -68,14 +71,26 @@
 <script>
 import pie from "./pieView.vue"
 import columnar from "./ColumnarView.vue"
+import { geteMpdats, geteBirthdays } from "../../utils/api"
 export default {
 	components: { pie, columnar },
 	data() {
 		return {
-			date: new Date()
+			date: new Date(),
+			empdats: {},
+			birthdaysKeys: [],
+			birthdaysValue: [],
+			flag: false
 		}
 	},
-	created() {},
+	created() {
+		//获取员工数据
+		geteMpdats().then((res) => {
+			this.empdats = res.data.data
+		})
+		//员工分布
+
+	},
 	mounted() {},
 	methods: {}
 }

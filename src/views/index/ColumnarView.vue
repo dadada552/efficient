@@ -3,42 +3,41 @@
 </template>
 
 <script>
+import { geteBirthdays } from "../../utils/api"
 import * as echarts from "echarts"
 export default {
 	components: {},
 	data() {
-		return {}
+		return {
+			birthdaysKeys: [],
+			birthdaysValue: []
+		}
 	},
-	created() {},
+	created() {
+		geteBirthdays().then((res) => {
+			this.birthdaysKeys = Object.keys(res.data.data)
+			this.birthdaysValue = Object.values(res.data.data)
+			console.log()
+		})
+	},
 	mounted() {
+		console.log(this)
+		console.log(this.birthdaysKeys)
+		let _this = this
 		let chartDom = document.getElementById("birthday")
 		let myChart = echarts.init(chartDom)
 		let option
-
 		option = {
 			xAxis: {
 				type: "category",
-				data: [
-					"1月",
-					"2月",
-					"3月",
-					"4月",
-					"5月",
-					"6月",
-					"7月",
-					"8月",
-					"9月",
-					"10月",
-					"11月",
-					"12月"
-				]
+				data: _this.birthdaysKeys
 			},
 			yAxis: {
 				type: "value"
 			},
 			series: [
 				{
-					data: [120, 200, 150, 80, 70, 110, 130, 0, 0, 15, 200, 300],
+					data: _this.birthdaysValue,
 					type: "bar",
 					showBackground: true,
 					backgroundStyle: {

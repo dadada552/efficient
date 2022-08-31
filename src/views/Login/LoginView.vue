@@ -32,10 +32,10 @@
 						</div>
 					</el-form-item>
 					<!-- 验证码 -->
-					<el-form-item prop="testing">
+					<el-form-item prop="code">
 						<div class="testing-box">
 							<el-input
-								v-model.trim="ruleForm.testing"
+								v-model.trim="ruleForm.code"
 								style="width: 60%"
 								placeholder="验证码"
 							></el-input>
@@ -67,7 +67,8 @@
 
 <script>
 import forgetPwd from "./forgetPwd.vue"
-import axios from "axios"
+import { getImg, login } from "../../utils/api"
+import { setToken } from "../../utils/auth"
 export default {
 	components: { forgetPwd },
 	data() {
@@ -76,7 +77,7 @@ export default {
 			ruleForm: {
 				name: "",
 				password: "",
-				testing: ""
+				code: ""
 			},
 			showForgetPwdD: false,
 			//图片路径
@@ -91,14 +92,12 @@ export default {
 					{ required: true, message: "请输入密码", trigger: "blur" },
 					{ min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
 				],
-				testing: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+				code: [{ required: true, message: "请输入验证码", trigger: "blur" }]
 			}
 		}
 	},
 	created() {
-		axios.get("/effect/user/imgcode/").then((res) => {
-			this.imgUrl = res.data.img
-		})
+		getImg().then((res) => {})
 	},
 	mounted() {},
 	methods: {
@@ -107,24 +106,14 @@ export default {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
 					//登录的接口
-					axios
-						.post("/effect/user/login/", {
-							params: {
-								name: this.ruleForm.name,
-								password: this.ruleForm.password,
-								code: this.ruleForm.testing
-							}
-						})
-						.then((res) => {
-							console.log(res.data.token)
-							if (res.data.code == "200") {
-								localStorage.setItem("token", res.data.token)
-								this.$message.success(res.data.msg)
-								this.$router.push("/")
-							} else {
-								this.$message.error(res.data.msg)
-							}
-						})
+					login(this.ruleForm).then((res) => {
+						if (res.data.code == 200) {
+							this.$message.success(res.data.msg)
+							this.$router.push("/")
+						} else {
+							this.$message.error(res.data.msg)
+						}
+					})
 				}
 			})
 		},
@@ -138,7 +127,6 @@ export default {
 }
 </script>
 
-// 样式
 <style scoped lang="scss">
 .login {
 	width: 100%;

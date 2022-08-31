@@ -13,36 +13,7 @@
 						alt=""
 					/>
 				</div>
-				<el-menu
-					:default-active="$route.path"
-					class="el-menu-vertical-demo"
-					@open="handleOpen"
-					@close="handleClose"
-					:collapse="isCollapse"
-					background-color="#468bf3"
-					text-color="#fff"
-					active-text-color="#fff"
-					router
-				>
-					<template v-for="item in menuList">
-						<el-menu-item v-if="!item.isDir" :index="item.path" :key="item.id">
-							<i :class="item.icon" style="color: #fff"></i>
-							<span slot="title">{{ item.name }}</span>
-						</el-menu-item>
-						<el-submenu v-else :index="item.path" :key="item.id">
-							<template v-slot:title>
-								<i :class="item.icon" style="color: #fff"></i>
-								<span slot="title">{{ item.name }}</span>
-							</template>
-							<el-menu-item
-								v-for="child in item.children"
-								:key="child.id"
-								:index="child.path"
-								>{{ child.name }}</el-menu-item
-							>
-						</el-submenu>
-					</template>
-				</el-menu>
+				<my-aside :isCollapse="isCollapse" ></my-aside>
 			</el-aside>
 			<el-container>
 				<el-header>
@@ -89,21 +60,16 @@
 </template>
 
 <script>
-import axios from "axios"
+import myAside from "../components/myAside.vue"
 export default {
-	components: {},
+	components: { myAside },
 	data() {
 		return {
 			is_full: false,
 			isCollapse: false,
-			menuList: []
 		}
 	},
 	created() {
-		axios.get("/effect/home/menus/").then((res) => {
-			console.log(res.data.data)
-			this.menuList = res.data.data
-		})
 	},
 	mounted() {},
 	methods: {
@@ -137,12 +103,7 @@ export default {
 		showAside() {
 			this.isCollapse = !this.isCollapse
 		},
-		handleOpen(key, keyPath) {
-			console.log(key, keyPath)
-		},
-		handleClose(key, keyPath) {
-			console.log(key, keyPath)
-		}
+
 	}
 }
 </script>
@@ -155,13 +116,7 @@ export default {
 	border-bottom: 2px solid #bbb;
 	border-top: 2px solid #bbb;
 }
-.el-menu-item.is-active {
-	background-color: orange !important;
-}
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-	width: 200px;
-	min-height: 400px;
-}
+
 ::v-deep .el-icon-arrow-down {
 	color: #fff;
 	font-weight: 600;

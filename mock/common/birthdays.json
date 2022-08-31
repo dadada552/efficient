@@ -1,0 +1,18 @@
+{
+	"code": 200,
+	"msg": "获取成功",
+	"data": {
+		"january": 0,
+		"february": 0,
+		"march": 0,
+		"april": 2,
+		"may": 1,
+		"june": 1,
+		"july": 1,
+		"august": 2,
+		"september": 1,
+		"october": 1,
+		"november": 0,
+		"december": 1
+	}
+}

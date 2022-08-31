@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { forgetPwd } from "../../utils/api"
 export default {
 	props: ["dialogFormVisible"],
 	components: {},
@@ -76,8 +77,21 @@ export default {
 		},
 		//点击确定 关闭对话框并且 请求数据
 		sure() {
-			this.$emit("update:dialogFormVisible", false)
-			console.log(1)
+			//
+			forgetPwd({
+				name: this.ruleForm.name,
+				password: this.ruleForm.password,
+				mobile: "1",
+				code: "1"
+			}).then((res) => {
+				console.log(res)
+				if (res.data.code == 200) {
+					this.$message.success(res.data.msg)
+					this.$emit("update:dialogFormVisible", false)
+				} else {
+					this.$message.error(res.data.msg)
+				}
+			})
 		},
 		//关闭时候的回调函数
 		close() {
