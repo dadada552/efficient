@@ -22,7 +22,7 @@
 				<el-table-column prop="desc" label="备注"> </el-table-column>
 				<el-table-column label="操作">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+						<el-button size="mini" @click="handleEdit(scope.row)"
 							>编辑</el-button
 						>
 						<el-button
@@ -64,7 +64,7 @@ export default {
 					id: 1,
 					name: "P1",
 					create_date: "2022-08-23T12:00:00",
-					desc: ""
+					desc: "99999999999999"
 				}
 			],
 			currentPage: 1,
@@ -83,8 +83,12 @@ export default {
 			console.log(`当前页: ${val}`)
 		},
 		// 编辑
-		handleEdit(index, row) {
-			console.log(index, row)
+		handleEdit(row) {
+			this.rankFlag = true
+			this.$nextTick(() => {
+				this.$refs.rankDialog.dialogFormVisible = true
+				this.$refs.rankDialog.edit(row)
+			})
 		},
 		// 删除
 		handleDelete(index, row) {

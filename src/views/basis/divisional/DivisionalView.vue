@@ -125,7 +125,7 @@ export default {
 }
 </script>
 
-// 样式
+
 <style scoped lang="scss">
 .table-box {
 	width: 100%;

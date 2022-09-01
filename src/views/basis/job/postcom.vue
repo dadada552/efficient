@@ -25,7 +25,7 @@
 						<textarea
 							cols="30"
 							rows="10"
-							v-model="form.trea"
+							v-model="form.desc"
 							placeholder="拥有所有权限"
 						></textarea>
 					</el-form-item>
@@ -92,7 +92,7 @@ export default {
 			},
 			form: {
 				name: "",
-				trea: ""
+				desc: ""
 			},
 			dialogFormVisible: false
 		}
@@ -106,6 +106,9 @@ export default {
 		},
 		qx() {
 			this.$emit("add")
+		},
+		edit(row){
+			this.form = row
 		}
 	}
 }

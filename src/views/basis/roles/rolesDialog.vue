@@ -1,12 +1,15 @@
 <template>
 	<div>
-		<el-dialog title="新增角色" :visible.sync="dialogFormVisible">
+		<el-dialog
+			:title="flag ? '新增角色' : '修改角色'"
+			:visible.sync="dialogFormVisible"
+		>
 			<el-form :model="form">
 				<el-form-item label="角色名称">
 					<el-input
 						v-model="form.name"
 						autocomplete="off"
-						class="inp"
+						style="width: 200px"
 						placeholder="请输入用户名称"
 					></el-input>
 				</el-form-item>
@@ -23,7 +26,7 @@
 					<textarea
 						cols="30"
 						rows="10"
-						v-model="form.trea"
+						v-model="form.desc"
 						placeholder="拥有所有权限"
 					></textarea>
 				</el-form-item>
@@ -46,10 +49,10 @@ export default {
 				children: "children",
 				label: "label"
 			},
-
+			flag: true,
 			form: {
 				name: "",
-				trea: ""
+				desc: ""
 			},
 
 			data: [
@@ -82,8 +85,11 @@ export default {
 	mounted() {},
 	methods: {
 		handleNodeClick() {},
+		edit(row) {
+			this.form = row
+		},
 		add() {
-			this.$emit("add")
+			this.dialogFormVisible = false
 		},
 		qx() {
 			this.$emit("add")

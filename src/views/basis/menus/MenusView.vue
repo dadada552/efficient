@@ -27,14 +27,16 @@
 				default-expand-all
 				:tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
 			>
-				<el-table-column prop="date" label="日期" sortable width="180">
+				<el-table-column prop="name" label="菜单名称" sortable width="180">
 				</el-table-column>
-				<el-table-column prop="name" label="姓名" sortable width="180">
+				<el-table-column prop="url" label="菜单路径" sortable width="180">
 				</el-table-column>
-				<el-table-column prop="address" label="地址"> </el-table-column>
+				<el-table-column prop="sort" label="排序"> </el-table-column>
+				<el-table-column prop="icon" label="菜单图标"> </el-table-column>
+				<el-table-column prop="address" label="菜单类型"> </el-table-column>
 				<el-table-column label="操作">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+						<el-button size="mini" @click="handleEdit(scope.row)"
 							>编辑</el-button
 						>
 						<el-button
@@ -75,21 +77,24 @@ export default {
 			tableData: [
 				{
 					id: 3,
-					date: "2016-05-01",
+					url: "2016-05-01",
 					name: "王小虎",
 					address: "上海市普陀区金沙江路 1519 弄",
+					icon: "ele-...",
 					children: [
 						{
 							id: 31,
-							date: "2016-05-01",
+							url: "2016-05-01",
 							name: "王小虎",
-							address: "上海市普陀区金沙江路 1519 弄"
+							address: "上海市普陀区金沙江路 1519 弄",
+							icon: "ele-..."
 						},
 						{
 							id: 32,
-							date: "2016-05-01",
+							url: "2016-05-01",
 							name: "王小虎",
-							address: "上海市普陀区金沙江路 1519 弄"
+							address: "上海市普陀区金沙江路 1519 弄",
+							icon: "ele-..."
 						}
 					]
 				}
@@ -117,8 +122,12 @@ export default {
 			})
 		},
 		// 编辑
-		handleEdit(index, row) {
-			console.log(index, row)
+		handleEdit(row) {
+			this.menuFlag = true
+			this.$nextTick(() => {
+				this.$refs.menuDialog.dialogFormVisible = true
+				this.$refs.menuDialog.edit(row)
+			})
 		},
 		// 删除
 		handleDelete(index, row) {
@@ -154,5 +163,8 @@ export default {
 	margin-right: 0;
 	margin-bottom: 0;
 	width: 50%;
+}
+.page-box{
+	text-align: right;
 }
 </style>

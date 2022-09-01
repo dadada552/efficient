@@ -15,7 +15,7 @@
 						<textarea
 							cols="30"
 							rows="10"
-							v-model="form.trea"
+							v-model="form.desc"
 							placeholder="拥有所有权限"
 						></textarea>
 					</el-form-item>
@@ -36,15 +36,18 @@ export default {
 		return {
 			form: {
 				name: "",
-				trea: ""
+				desc: ""
 			},
-			dialogFormVisible:false
+			dialogFormVisible: false
 		}
 	},
 	created() {},
 	mounted() {},
 	methods: {
 		handleNodeClick() {},
+		edit(row) {
+			this.form = row
+		},
 		add() {
 			this.$emit("add")
 		},

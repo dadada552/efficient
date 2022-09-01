@@ -61,8 +61,7 @@
 		<div class="employees-birthday">
 			<div class="title">员工生日</div>
 			<div>
-				<columnar
-				></columnar>
+				<columnar></columnar>
 			</div>
 		</div>
 	</div>
@@ -89,7 +88,6 @@ export default {
 			this.empdats = res.data.data
 		})
 		//员工分布
-
 	},
 	mounted() {},
 	methods: {}
@@ -193,5 +191,8 @@ export default {
 	font-size: 18px;
 	padding-left: 10px;
 	border-bottom: 1px solid #000;
+}
+:deep .el-calendar__button-group {
+	display: none !important;
 }
 </style>

@@ -22,10 +22,10 @@
 			<el-table :data="tableData" stripe style="width: 100%" border>
 				<el-table-column prop="id" label="id"> </el-table-column>
 				<el-table-column prop="name" label="岗位名称"> </el-table-column>
-				<el-table-column prop="id" label="备注"> </el-table-column>
+				<el-table-column prop="desc" label="备注"> </el-table-column>
 				<el-table-column label="操作">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+						<el-button size="mini" @click="handleEdit(scope.row)"
 							>编辑</el-button
 						>
 						<el-button
@@ -69,7 +69,8 @@ export default {
 					name: "实习生",
 					rank_id: 4,
 					department_id: 1,
-					create_date: "2022-08-23T12:00:00"
+					create_date: "2022-08-23T12:00:00",
+					desc: "9999999"
 				}
 			],
 			currentPage: 1,
@@ -88,8 +89,12 @@ export default {
 			console.log(`当前页: ${val}`)
 		},
 		// 编辑
-		handleEdit(index, row) {
-			console.log(index, row)
+		handleEdit(row) {
+			this.jobFlag = true
+			this.$nextTick(() => {
+				this.$refs.jobDialog.dialogFormVisible = true
+				this.$refs.jobDialog.edit(row)
+			})
 		},
 		// 删除
 		handleDelete(index, row) {

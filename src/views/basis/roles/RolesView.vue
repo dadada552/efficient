@@ -21,8 +21,8 @@
 				<el-table-column prop="id" label="备注"> </el-table-column>
 				<el-table-column label="操作">
 					<template slot-scope="scope">
-						<el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-							>编辑</el-button
+						<el-button size="mini" @click="handleEdit(scope.row)"
+							>修改</el-button
 						>
 						<el-button
 							size="mini"
@@ -81,9 +81,15 @@ export default {
 		handleCurrentChange(val) {
 			console.log(`当前页: ${val}`)
 		},
-		// 编辑
-		handleEdit(index, row) {
-			console.log(index, row)
+		/**修改 */
+		handleEdit(row) {
+			// console.log(row)
+			this.rolesFlag = true
+			this.$nextTick(() => {
+				this.$refs.roles.dialogFormVisible = true
+				this.$refs.roles.flag = false
+				this.$refs.roles.edit(row)
+			})
 		},
 		// 删除
 		handleDelete(index, row) {
@@ -96,6 +102,7 @@ export default {
 			this.rolesFlag = true
 			this.$nextTick(() => {
 				this.$refs.roles.dialogFormVisible = true
+				this.$refs.roles.flag = true
 			})
 		},
 		// 重置

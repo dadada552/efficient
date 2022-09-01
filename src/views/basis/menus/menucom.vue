@@ -68,6 +68,7 @@ export default {
 	data() {
 		return {
 			dialogFormVisible: false,
+
 			// 上级菜单
 			data: [
 				{
@@ -102,6 +103,7 @@ export default {
 				label: "label"
 			},
 			form: {
+				radio: "1",
 				name: "",
 				url: "",
 				icon: "",
@@ -114,11 +116,13 @@ export default {
 	mounted() {},
 	methods: {
 		handleNodeClick() {},
-		add() {
-			this.$emit("add")
-		},
+		add() {},
 		qx() {
 			this.$emit("add")
+		},
+		edit(row) {
+			console.log(row)
+			this.form = row
 		}
 	}
 }
